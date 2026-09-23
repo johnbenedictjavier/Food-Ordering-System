@@ -1,42 +1,58 @@
-# Food Ordering System
+# Laurel & Ladle
 
-A simple, responsive food ordering kiosk built with vanilla HTML, CSS, and JavaScript. The interface uses a bold red and yellow quick-service restaurant style, touch-friendly controls, and lightweight animations.
+A responsive Filipino and Asian comfort-food ordering kiosk built with vanilla HTML, CSS, and JavaScript.
 
 ## Features
 
-- Six food items with Philippine peso prices
-- Food selection and quantity controls
-- Automatic total calculation
-- Customer name validation
-- Supabase order storage
-- Animated loading and confirmation states
-- Responsive desktop and mobile layout
+- 16 locally stored menu images across appetizers, soup, main courses, desserts, and beverages
+- Category filters and touch-friendly menu cards
+- Multi-item cart with quantity and remove controls
+- Live line totals and Philippine peso order total
+- Customer validation and accessible status messages
+- Atomic Supabase checkout with database-controlled menu prices
+- Animated thermal-style receipt with an 80 mm print layout
+- Responsive desktop, tablet, and mobile layouts
 - Reduced-motion accessibility support
 
 ## Supabase Setup
 
-The app uses the supplied Supabase publishable key. This key is designed for browser use; database access is restricted using Row Level Security.
+The browser uses a Supabase publishable key. Public clients can only execute the checkout function; Row Level Security and revoked table privileges prevent public order reads, edits, and deletes.
 
-1. Open the [Supabase dashboard](https://supabase.com/dashboard/project/nirtjqjcqaxlrskuvpjy).
-2. Select **SQL Editor** and create a new query.
+> `supabase-schema.sql` replaces the old demo schema and deletes any existing order data.
+
+1. Open the [Supabase project dashboard](https://supabase.com/dashboard/project/nirtjqjcqaxlrskuvpjy).
+2. Open **SQL Editor** and create a new query.
 3. Paste the contents of `supabase-schema.sql`.
-4. Click **Run**.
+4. Select **Run**.
 
-The policy permits public order creation but does not permit public reading, editing, or deleting of customer orders.
+The script creates:
+
+- `menu_items`: the server-side product and price catalog
+- `orders`: customer, reference, total, and timestamp
+- `order_items`: normalized quantity, price, and line-total records
+- `place_order(customer_name, items)`: an atomic checkout function that rejects unknown products, invalid quantities, duplicate lines, and client-side price manipulation
 
 ## Run Locally
 
-Open the folder in Visual Studio Code and run `index.html` using the Live Server extension. You can also use any simple static web server.
+Serve the project directory with any static server. For example:
+
+```bash
+npx serve .
+```
+
+Opening `index.html` directly also works, although a local server gives browser behavior closer to production.
 
 ## Project Files
 
-- `index.html`: kiosk page structure
-- `styles.css`: responsive design and animations
-- `app.js`: menu, calculations, validation, and Supabase integration
-- `supabase-schema.sql`: database table and security policy
+- `index.html`: semantic kiosk and receipt structure
+- `styles.css`: brand design, responsive layout, animations, and print rules
+- `app.js`: menu catalog, filters, cart, checkout, and receipt behavior
+- `supabase-schema.sql`: normalized schema, permissions, and checkout function
+- `assets/images`: local menu photography
+- `IMAGE_CREDITS.md`: photography sources and attribution links
 
 ## Repository
 
 https://github.com/johnbenedictjavier/Food-Ordering-System
 
-Menu photography is loaded from Unsplash. This educational project is McDonald's-inspired and is not affiliated with or endorsed by McDonald's Corporation.
+Laurel & Ladle is an original project identity. See `IMAGE_CREDITS.md` for third-party photography sources.

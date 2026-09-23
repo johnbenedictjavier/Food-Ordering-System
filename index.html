@@ -3,136 +3,148 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="A simple, touch-friendly food ordering kiosk.">
-    <title>Food Ordering System</title>
+    <meta name="description" content="Order Filipino and Asian comfort food from Laurel & Ladle.">
+    <meta name="theme-color" content="#173f35">
+    <title>Laurel &amp; Ladle | Food Ordering</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&amp;family=Playfair+Display:wght@600;700&amp;display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
   </head>
   <body>
     <a class="skip-link" href="#menu">Skip to menu</a>
 
     <header class="site-header">
-      <div class="brand">
-        <span class="brand-mark" aria-hidden="true">F</span>
-        <span>
-          <strong>FOOD ORDERING SYSTEM</strong>
-          <small>Fresh favorites, made for you</small>
+      <a class="brand" href="#top" aria-label="Laurel and Ladle home">
+        <svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true">
+          <path class="mark-ring" d="M18 47C6 35 10 16 25 9M46 47C58 35 54 16 39 9"></path>
+          <path class="mark-leaves" d="M15 39l-7-1m9-6-7-3m11-5-5-5m33 20 7-1m-9-6 7-3m-11-5 5-5"></path>
+          <path class="mark-spoon" d="M32 13c-5 0-7 5-7 9 0 5 3 8 5 9l-2 20h8l-2-20c2-1 5-4 5-9 0-4-2-9-7-9Z"></path>
+          <text x="32" y="44">L&amp;L</text>
+        </svg>
+        <span class="brand-copy">
+          <strong>Laurel <i>&amp;</i> Ladle</strong>
+          <small>Gather. Savor. Belong.</small>
         </span>
+      </a>
+      <div class="header-actions">
+        <span class="service-status"><i></i> Kitchen open</span>
+        <a class="cart-jump" href="#order">
+          <span>My order</span>
+          <strong id="headerCartCount">0</strong>
+        </a>
       </div>
-      <div class="open-status"><span></span> Ready to order</div>
     </header>
 
-    <main>
+    <main id="top">
       <section class="hero" aria-labelledby="hero-title">
         <div class="hero-copy">
-          <p class="eyebrow">QUICK. EASY. DELICIOUS.</p>
-          <h1 id="hero-title">What are you craving today?</h1>
-          <p>Tap your favorite, choose a quantity, and place your order.</p>
+          <p class="eyebrow">FILIPINO ROOTS · ASIAN FAVORITES</p>
+          <h1 id="hero-title">Comfort food,<br><em>thoughtfully served.</em></h1>
+          <p class="hero-description">A generous table of familiar flavors, prepared for everyday gatherings and shared moments.</p>
+          <a href="#menu" class="hero-link">Explore the menu <span aria-hidden="true">↓</span></a>
         </div>
-        <div class="hero-badge" aria-hidden="true">
-          <span>6</span>
-          <small>FRESH<br>FAVORITES</small>
+        <div class="hero-visual" aria-hidden="true">
+          <div class="hero-image-wrap">
+            <img src="assets/images/lechon-kawali.jpg" alt="">
+          </div>
+          <div class="hero-seal"><strong>16</strong><span>HOUSE<br>FAVORITES</span></div>
+          <span class="botanical botanical-one">❧</span>
+          <span class="botanical botanical-two">❧</span>
         </div>
       </section>
 
-      <div class="kiosk-layout">
-        <section class="menu-section" id="menu" aria-labelledby="menu-title">
-          <div class="section-heading">
-            <div>
-              <p class="eyebrow dark">OUR MENU</p>
-              <h2 id="menu-title">Choose your food</h2>
-            </div>
-            <span class="menu-count">6 items</span>
-          </div>
+      <section class="menu-intro" id="menu" aria-labelledby="menu-title">
+        <div>
+          <p class="eyebrow green">OUR TABLE</p>
+          <h2 id="menu-title">Choose something delicious</h2>
+        </div>
+        <p>Tap any dish to add it to your order. Mix, match, and make it yours.</p>
+      </section>
+
+      <nav class="category-tabs" id="categoryTabs" aria-label="Menu categories">
+        <button type="button" class="active" data-category="All" aria-pressed="true">All <span>16</span></button>
+        <button type="button" data-category="Appetizers" aria-pressed="false">Appetizers <span>4</span></button>
+        <button type="button" data-category="Soup" aria-pressed="false">Soup <span>2</span></button>
+        <button type="button" data-category="Main Course" aria-pressed="false">Main Course <span>3</span></button>
+        <button type="button" data-category="Desserts" aria-pressed="false">Desserts <span>4</span></button>
+        <button type="button" data-category="Beverages" aria-pressed="false">Beverages <span>3</span></button>
+      </nav>
+
+      <div class="ordering-layout">
+        <section class="menu-section" aria-label="Food menu">
           <div class="menu-grid" id="menuGrid"></div>
         </section>
 
-        <aside class="order-panel" aria-labelledby="order-title">
+        <aside class="order-panel" id="order" aria-labelledby="order-title">
           <form id="orderForm" novalidate>
             <div class="order-heading">
               <div>
-                <p class="eyebrow dark">YOUR ORDER</p>
-                <h2 id="order-title">Order summary</h2>
+                <p class="eyebrow gold">YOUR TABLE</p>
+                <h2 id="order-title">Current order</h2>
               </div>
-              <span class="order-number">#01</span>
+              <span class="item-count" id="cartItemCount">0 items</span>
             </div>
 
             <div class="form-field">
-              <label for="customerName">Customer name</label>
-              <input id="customerName" name="customerName" type="text" maxlength="80" autocomplete="name" placeholder="Enter your name" aria-describedby="nameError">
+              <label for="customerName">Name for the order</label>
+              <input id="customerName" name="customerName" type="text" maxlength="80" autocomplete="name" placeholder="e.g. Maria Santos" aria-describedby="nameError">
               <p class="field-error" id="nameError"></p>
             </div>
 
-            <div class="selected-food" id="selectedFood">
-              <div class="selected-placeholder" id="selectedPlaceholder">
-                <span aria-hidden="true">+</span>
-                <p>Select a food item from the menu</p>
-              </div>
-              <div class="selected-content" id="selectedContent" hidden>
-                <img id="selectedImage" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" alt="">
-                <div>
-                  <small>CHOOSE FOOD</small>
-                  <strong id="selectedName"></strong>
-                </div>
-                <span class="selected-check" aria-hidden="true">&#10003;</span>
-              </div>
-            </div>
-            <p class="field-error food-error" id="foodError"></p>
+            <div class="cart-list" id="cartList"></div>
+            <p class="field-error cart-error" id="cartError"></p>
 
-            <div class="order-row">
-              <span>Price</span>
-              <strong id="unitPrice">PHP 0.00</strong>
-            </div>
-
-            <div class="order-row quantity-row">
-              <span>Quantity</span>
-              <div class="quantity-control">
-                <button type="button" id="decreaseQuantity" aria-label="Decrease quantity" disabled>&minus;</button>
-                <input id="quantity" name="quantity" type="number" min="1" max="99" value="1" inputmode="numeric" aria-label="Quantity" disabled>
-                <button type="button" id="increaseQuantity" aria-label="Increase quantity" disabled>+</button>
-              </div>
-            </div>
-
-            <div class="total-row">
-              <span>Total</span>
-              <strong id="totalPrice">PHP 0.00</strong>
+            <div class="order-totals">
+              <div><span>Items</span><strong id="subtotalPrice">₱0.00</strong></div>
+              <div class="grand-total"><span>Total</span><strong id="totalPrice">₱0.00</strong></div>
             </div>
 
             <p class="form-status" id="formStatus" role="alert"></p>
-
             <button class="place-order-button" id="placeOrderButton" type="submit">
-              <span class="button-label">Place order</span>
+              <span class="button-label">Send order to kitchen</span>
               <span class="button-spinner" aria-hidden="true"></span>
-              <span class="button-arrow" aria-hidden="true">&rarr;</span>
+              <span class="button-arrow" aria-hidden="true">→</span>
             </button>
-            <p class="secure-note">
-              <span aria-hidden="true">&#128274;</span> Your order is securely saved to Supabase
-            </p>
+            <p class="secure-note"><span aria-hidden="true">◇</span> Securely recorded with Supabase</p>
           </form>
         </aside>
       </div>
     </main>
 
     <footer>
-      <strong>FOOD ORDERING SYSTEM</strong>
-      <span>Simple food ordering kiosk</span>
+      <div class="footer-brand">Laurel <i>&amp;</i> Ladle</div>
+      <p>Good food tastes better together.</p>
+      <span>Made with care · Served with heart</span>
     </footer>
 
-    <div class="success-overlay" id="successOverlay" hidden>
-      <section class="success-card" role="dialog" aria-modal="true" aria-labelledby="successTitle" aria-describedby="successMessage">
-        <div class="success-icon" aria-hidden="true">
-          <svg viewBox="0 0 52 52"><circle cx="26" cy="26" r="24"></circle><path d="M15 27l7 7 15-16"></path></svg>
+    <div class="receipt-overlay" id="receiptOverlay" hidden>
+      <section class="receipt-dialog" role="dialog" aria-modal="true" aria-labelledby="receiptTitle">
+        <div class="printer-slot" aria-hidden="true"><span></span></div>
+        <article class="receipt-paper" id="receiptPaper">
+          <header class="receipt-header">
+            <div class="receipt-monogram">L&amp;L</div>
+            <h2 id="receiptTitle">Laurel &amp; Ladle</h2>
+            <p>Gather. Savor. Belong.</p>
+          </header>
+          <div class="receipt-meta">
+            <p><span>ORDER</span><strong id="receiptReference"></strong></p>
+            <p><span>DATE</span><strong id="receiptDate"></strong></p>
+            <p><span>NAME</span><strong id="receiptCustomer"></strong></p>
+          </div>
+          <div class="receipt-rule">✦</div>
+          <div class="receipt-items" id="receiptItems"></div>
+          <div class="receipt-total"><span>TOTAL</span><strong id="receiptTotal"></strong></div>
+          <div class="receipt-thanks">
+            <strong>Thank you for dining with us.</strong>
+            <p>Your order has been sent to the kitchen.</p>
+          </div>
+          <div class="receipt-code" id="receiptCode" aria-hidden="true"></div>
+        </article>
+        <div class="receipt-actions">
+          <button class="print-button" id="printReceiptButton" type="button">Print receipt</button>
+          <button class="new-order-button" id="newOrderButton" type="button">Start a new order</button>
         </div>
-        <p class="eyebrow dark">ORDER CONFIRMED</p>
-        <h2 id="successTitle" tabindex="-1">Order successfully placed!</h2>
-        <p id="successMessage">Thank you. Your order has been sent to the kitchen.</p>
-        <div class="success-total">
-          <span>Order total</span>
-          <strong id="successTotal"></strong>
-        </div>
-        <button id="newOrderButton" type="button">Place another order</button>
       </section>
     </div>
 
