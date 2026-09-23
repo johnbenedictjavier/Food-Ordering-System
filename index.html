@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A simple, touch-friendly food ordering kiosk.">
+    <title>Food Ordering System</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <a class="skip-link" href="#menu">Skip to menu</a>
+
+    <header class="site-header">
+      <div class="brand">
+        <span class="brand-mark" aria-hidden="true">F</span>
+        <span>
+          <strong>FOOD ORDERING SYSTEM</strong>
+          <small>Fresh favorites, made for you</small>
+        </span>
+      </div>
+      <div class="open-status"><span></span> Ready to order</div>
+    </header>
+
+    <main>
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="hero-copy">
+          <p class="eyebrow">QUICK. EASY. DELICIOUS.</p>
+          <h1 id="hero-title">What are you craving today?</h1>
+          <p>Tap your favorite, choose a quantity, and place your order.</p>
+        </div>
+        <div class="hero-badge" aria-hidden="true">
+          <span>6</span>
+          <small>FRESH<br>FAVORITES</small>
+        </div>
+      </section>
+
+      <div class="kiosk-layout">
+        <section class="menu-section" id="menu" aria-labelledby="menu-title">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow dark">OUR MENU</p>
+              <h2 id="menu-title">Choose your food</h2>
+            </div>
+            <span class="menu-count">6 items</span>
+          </div>
+          <div class="menu-grid" id="menuGrid"></div>
+        </section>
+
+        <aside class="order-panel" aria-labelledby="order-title">
+          <form id="orderForm" novalidate>
+            <div class="order-heading">
+              <div>
+                <p class="eyebrow dark">YOUR ORDER</p>
+                <h2 id="order-title">Order summary</h2>
+              </div>
+              <span class="order-number">#01</span>
+            </div>
+
+            <div class="form-field">
+              <label for="customerName">Customer name</label>
+              <input id="customerName" name="customerName" type="text" maxlength="80" autocomplete="name" placeholder="Enter your name" aria-describedby="nameError">
+              <p class="field-error" id="nameError"></p>
+            </div>
+
+            <div class="selected-food" id="selectedFood">
+              <div class="selected-placeholder" id="selectedPlaceholder">
+                <span aria-hidden="true">+</span>
+                <p>Select a food item from the menu</p>
+              </div>
+              <div class="selected-content" id="selectedContent" hidden>
+                <img id="selectedImage" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" alt="">
+                <div>
+                  <small>CHOOSE FOOD</small>
+                  <strong id="selectedName"></strong>
+                </div>
+                <span class="selected-check" aria-hidden="true">&#10003;</span>
+              </div>
+            </div>
+            <p class="field-error food-error" id="foodError"></p>
+
+            <div class="order-row">
+              <span>Price</span>
+              <strong id="unitPrice">PHP 0.00</strong>
+            </div>
+
+            <div class="order-row quantity-row">
+              <span>Quantity</span>
+              <div class="quantity-control">
+                <button type="button" id="decreaseQuantity" aria-label="Decrease quantity" disabled>&minus;</button>
+                <input id="quantity" name="quantity" type="number" min="1" max="99" value="1" inputmode="numeric" aria-label="Quantity" disabled>
+                <button type="button" id="increaseQuantity" aria-label="Increase quantity" disabled>+</button>
+              </div>
+            </div>
+
+            <div class="total-row">
+              <span>Total</span>
+              <strong id="totalPrice">PHP 0.00</strong>
+            </div>
+
+            <p class="form-status" id="formStatus" role="alert"></p>
+
+            <button class="place-order-button" id="placeOrderButton" type="submit">
+              <span class="button-label">Place order</span>
+              <span class="button-spinner" aria-hidden="true"></span>
+              <span class="button-arrow" aria-hidden="true">&rarr;</span>
+            </button>
+            <p class="secure-note">
+              <span aria-hidden="true">&#128274;</span> Your order is securely saved to Supabase
+            </p>
+          </form>
+        </aside>
+      </div>
+    </main>
+
+    <footer>
+      <strong>FOOD ORDERING SYSTEM</strong>
+      <span>Simple food ordering kiosk</span>
+    </footer>
+
+    <div class="success-overlay" id="successOverlay" hidden>
+      <section class="success-card" role="dialog" aria-modal="true" aria-labelledby="successTitle" aria-describedby="successMessage">
+        <div class="success-icon" aria-hidden="true">
+          <svg viewBox="0 0 52 52"><circle cx="26" cy="26" r="24"></circle><path d="M15 27l7 7 15-16"></path></svg>
+        </div>
+        <p class="eyebrow dark">ORDER CONFIRMED</p>
+        <h2 id="successTitle" tabindex="-1">Order successfully placed!</h2>
+        <p id="successMessage">Thank you. Your order has been sent to the kitchen.</p>
+        <div class="success-total">
+          <span>Order total</span>
+          <strong id="successTotal"></strong>
+        </div>
+        <button id="newOrderButton" type="button">Place another order</button>
+      </section>
+    </div>
+
+    <div class="sr-only" id="liveRegion" aria-live="polite"></div>
+    <script src="app.js"></script>
+  </body>
+</html>
